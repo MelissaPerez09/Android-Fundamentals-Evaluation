@@ -16,12 +16,15 @@ class MainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val pokemonList = PokemonRepository().getPokemonList()
         /*New val for RecyclerView*/
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val repository = PokemonRepository()
+        val adapter = PokemonListAdapter(repository.pokemonList)
+
         /*Starts doing the adapter*/
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = PokemonListAdapter(pokemonList)
+        recyclerView.adapter = adapter
+        val pokemonList = repository.getPokemonList(adapter)
 
         /*Divides depending on the context*/
         recyclerView.addItemDecoration(

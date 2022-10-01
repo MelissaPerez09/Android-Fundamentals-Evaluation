@@ -29,12 +29,12 @@ class DetailFragment : Fragment() {
 
         var pic: ImageView = view.findViewById(R.id.front)
         super.onViewCreated(view, savedInstanceState)
-        Picasso.get().load(thisPokemon.pokemonObj.imageUrlFront).into(pic)
+        Picasso.get().load(thisPokemon.pokemonID.imageUrlFront).into(pic)
         pic = view.findViewById(R.id.back)
-        Picasso.get().load(thisPokemon.pokemonObj.imageUrlBack).into(pic)
+        Picasso.get().load(thisPokemon.pokemonID.imageUrlBack).into(pic)
         pic = view.findViewById(R.id.frontShinny)
-        Picasso.get().load(thisPokemon.pokemonObj.imageUrlShinnyFront).into(pic)
+        Picasso.get().load(thisPokemon.pokemonID.imageUrlShinnyFront).into(pic)
         pic = view.findViewById(R.id.backShinny)
-        Picasso.get().load(thisPokemon.pokemonObj.imageUrlShinnyBack).into(pic)
+        Picasso.get().load(thisPokemon.pokemonID.imageUrlShinnyBack).into(pic)
     }
 }

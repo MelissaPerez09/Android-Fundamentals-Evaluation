@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import gt.uvg.pokelist.R
 import gt.uvg.pokelist.databinding.ItemPokemonViewBinding
 import gt.uvg.pokelist.model.Pokemon
 
-class PokemonListAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.Adapter<PokemonListAdapter.PokemonListHolder>() {
+class PokemonListAdapter(private var pokemonList: List<Pokemon>) : RecyclerView.Adapter<PokemonListAdapter.PokemonListHolder>() {
 
     inner class PokemonListHolder(val binding: ItemPokemonViewBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -20,13 +21,19 @@ class PokemonListAdapter(private val pokemonList: List<Pokemon>) : RecyclerView.
     override fun onBindViewHolder(holder: PokemonListHolder, position: Int) {
         /*Invoke the layout manager to implement the pictures*/
         val poke = pokemonList[position]
-        holder.binding.pokemonName.text = poke.name
-        Picasso.get().load(poke.imageUrlFront).into(holder.binding.pokemonPhoto)
 
-        /*Generates the action for the fragment*/
-        val action = MainFragmentDirections.actionMainFragmentToDetailFragment(poke)
-        holder.binding.root.setOnClickListener{
-            holder.itemView.findNavController().navigate(action)
+        with(holder){
+            binding.pokemonName.text = poke.name
+            Picasso.get()
+                .load(poke.imageUrlFront)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(holder.binding.pokemonPhoto)
+
+            /*Generates the action for the fragment*/
+            val action = MainFragmentDirections.actionMainFragmentToDetailFragment(poke)
+            binding.root.setOnClickListener{
+                holder.itemView.findNavController().navigate(action)
+            }
         }
     }
 
